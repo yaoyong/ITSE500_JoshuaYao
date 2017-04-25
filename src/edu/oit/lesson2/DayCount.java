@@ -34,7 +34,7 @@ public class DayCount {
 		else if (year % 4 == 0) {
 			dayYear = 366;
 			temp = 0;// "is smooth";
-		} // 判断能否被4整除
+		} // 判断能否被4整除.
 		else {
 			dayYear = 365;
 			temp = 1;// "is flat";
