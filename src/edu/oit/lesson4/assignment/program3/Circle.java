@@ -17,7 +17,7 @@ public class Circle extends Shape {
 	public Circle(double r) {
 		this.r = r;
 	}
-	public double area() {
+	public double getArea() {
 		return 3.14 * r * r;
 	}
 	public static void main(String[] args) {

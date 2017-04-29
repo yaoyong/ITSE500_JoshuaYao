@@ -16,7 +16,7 @@ public class Triangle extends Shape{
 		height = h;
 	}
 
-	public double area() {
+	public double getArea() {
 		return base * height/2;
 	}
 	
