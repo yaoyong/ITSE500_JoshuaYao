@@ -1,0 +1,6 @@
+implementation：https://github.com/kachhdh1/core-java-practice/blob/dca0168a0daa02e48839a0de55b71d1caa3a07e7/DemoJavaTeck/src/com/java/core/designer/CarDecorator.java
+extention：https://github.com/Jessenel/Midterm/blob/4e9958e6b8fbba4839bf13b3316ea6112b19c4d5/src/main/java/com/cisc181/core/PersonException.java
+dependency：https://github.com/alesveselka/J8A/blob/964ee980c64748f725648689fd594caeab78dc87/src/main/java/com/alesveselka/java8/optionals/Person.java
+association：https://github.com/pavelb190/JavaCore/blob/0cfd1436d88df33c16e3d04282102ca2b9d7cc95/Threads/Market/TestDemo.java
+aggregation：https://github.com/przodownikR1/spring4features/blob/b2359f64aa3c2dcae6ce22e79d94c69d1530bec9/src/test/java/pl/java/scalatech/test/basic/clazz/Car.java
+composition：https://github.com/bevictory/DesignPattern/blob/0f45ae6cadcac03e7ac5278840f3b02b9fd81950/src/facade/Computer.java
