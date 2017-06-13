@@ -1,5 +1,8 @@
-package lesson12.assignment;
+package lesson13.assignment;
 
+/**
+ * Created by Yong Yao} on 2017/6/12.
+ */
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +21,7 @@ import static java.lang.System.out;
 /**
  * Created by steven on 2017/6/5.
  */
-public class walmartCrawler {
+public class WalmartCrawler {
     public static final String URL_ROOT =
             "https://www.walmart.com/browse/shop-laptops-by-type/apple-laptops/3944_3951_1089430_1230091_4431341";
 
@@ -27,7 +30,7 @@ public class walmartCrawler {
         String url = URL_ROOT;
         Document doc = null;
         String type = null;
-        for (int page = 1; page < 3; page++) {
+        for (int page = 1; page < 2; page++) {
             url = URL_ROOT + "?page=" + page + "#searchProductResult";
 
             try {
@@ -38,10 +41,10 @@ public class walmartCrawler {
                 for (Element product : products) {
                     String title = product.select(".prod-ProductTitle div").get(0).text();
                     String price = product.select(".Price-characteristic").get(0).text();
-                    //String getfromFile = product.select(".Tile-img").attr("src");
-//                    String fromFile = "https:"+getfromFile;
-//                    i++;
-//                    String destinationFile = "product"+i+".jpeg";
+                    String getfromFile = product.select(".Tile-img").attr("src");
+                    String fromFile = "https:"+getfromFile;
+                    i++;
+                    String destinationFile = "product"+i+".jpeg";
                     Elements spanWithClass = product.select("span.product-list-price-block");
 
                     if (spanWithClass.size() > 0) {
@@ -59,10 +62,9 @@ public class walmartCrawler {
                     if (type == null) {
                         type = "type:   normal price";
                     } else type = "type:   on sale";
-                    out.println(type);
-                 //   saveFile(title,price,type,fromFile);
+                    saveFile(title,price,type,fromFile);
 
-                  //  saveImage(fromFile, destinationFile );
+                    saveImage(fromFile, destinationFile );
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -71,12 +73,35 @@ public class walmartCrawler {
 
     }
 
+    public static void saveImage(String imageUrl, String destinationFile) throws IOException {
+        URL url = new URL(imageUrl);
+        InputStream is = url.openStream();
+        OutputStream os = new FileOutputStream("products/"+destinationFile);
+        byte[] b = new byte[2048];
+        int length;
+        while ((length = is.read(b)) != -1) {
+            os.write(b, 0, length);
+        }
+        is.close();
+        os.close();
+    }
+
+
+    public static void saveFile(String title, String price, String type, String fromFile){
+        File file;
+        File productsFile = null;
+        try {
+            file = new File("document");
+            productsFile = new File(file, "taobao/products.txt");
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 //        try (BufferedReader br = new BufferedReader(new FileReader(linkFile))) {
 //            String currentLine;
 //            while ((currentLine = br.readLine()) != null) {
 //                System.out.println(currentLine);
 //            }
-    //        } catch (FileNotFoundException e) {
+        //        } catch (FileNotFoundException e) {
 //            e.printStackTrace();
 //        } catch (IOException e) {
 //            e.printStackTrace();
@@ -86,11 +111,29 @@ public class walmartCrawler {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+        try {
+            final String newLine = System.getProperty("line.separator");
+            FileUtils.writeStringToFile(productsFile, "  "+ title.substring(0,50) + " ,  price: " +price+ " ,  type: " +type+" . "+newLine, true);
+            String content = FileUtils.readFileToString(productsFile);
+            System.out.print(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
 
+            //connectionTimeout, readTimeout = 10 seconds
+            FileUtils.copyURLToFile(new URL(fromFile), new File("productsImage"), 10000, 10000);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     public static void main(String[] args) {
-        walmartCrawler walmartCrawler = new walmartCrawler();
-        walmartCrawler.crawle();
+        WalmartCrawler walmartCrawler1 = new WalmartCrawler();
+        walmartCrawler1.crawle();
     }
 
 }
