@@ -1,4 +1,4 @@
-package ede.oit.extra;
+package edu.oit.extra;
 //2.Write a Java program to find the key of the element in an Map 
 //which has the second smallest value.
 import java.util.HashMap;
